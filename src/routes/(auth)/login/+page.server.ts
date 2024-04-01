@@ -7,7 +7,7 @@ import type { Actions, PageServerLoad } from "./$types";
 
 export const load: PageServerLoad = async (event) => {
   if (event.locals.user) {
-    return redirect(302, "/");
+    return redirect(302, "/dashboard");
   }
   return {};
 };
@@ -67,6 +67,6 @@ export const actions: Actions = {
       ...sessionCookie.attributes,
     });
 
-    return redirect(302, "/");
+    return redirect(302, "/dashboard");
   },
 };

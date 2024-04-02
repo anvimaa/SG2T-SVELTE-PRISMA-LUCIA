@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Button } from "$lib/components/ui/button/index.js";
-  import UserAuthForm from "./(components)/user-auth-form.svelte";
+  import UserAuthForm from "$lib/components/sections/AuthForm.svelte";
   import AuthenticationLight from "$lib/img/examples/authentication-light.png";
   import AuthenticationDark from "$lib/img/examples/authentication-dark.png";
 </script>
@@ -37,9 +37,7 @@
   >
     <div
       class="absolute inset-0 bg-cover"
-      style="
-				background-image:
-					url(https://images.unsplash.com/photo-1590069261209-f8e9b8642343?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1376&q=80);"
+      style="background-image:url(/background-login.jpg);"
     />
     <div class="relative z-20 flex items-center text-lg font-medium">
       <!-- <Command class="mr-2 h-6 w-6" /> -->

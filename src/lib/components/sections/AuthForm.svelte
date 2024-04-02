@@ -2,8 +2,11 @@
   import { Button } from "$lib/components/ui/button/index.js";
   import { Input } from "$lib/components/ui/input/index.js";
   import { Label } from "$lib/components/ui/label/index.js";
+
+  import * as Alert from "$lib/components/ui/alert/index.js";
+
   import { cn } from "$lib/utils.js";
-  import GitHubIcon from "lucide-svelte/icons/spline";
+  import { Loader, CircleAlert } from "lucide-svelte";
 
   let className: string | undefined | null = undefined;
   export { className as class };
@@ -60,11 +63,19 @@
       </div>
       <Button type="submit" disabled={isLoading}>
         {#if isLoading}
-          <GitHubIcon class="mr-2 h-4 w-4 animate-spin" />
+          <Loader class="mr-2 h-4 w-4 animate-spin" />
         {/if}
         Iniciar Sessão
       </Button>
-      {msg}
+      {#if msg}
+        <Alert.Root variant="destructive">
+          <CircleAlert class="h-4 w-4" />
+          <Alert.Title>Atenção!</Alert.Title>
+          <Alert.Description>
+            {msg}
+          </Alert.Description>
+        </Alert.Root>
+      {/if}
     </div>
   </form>
 </div>

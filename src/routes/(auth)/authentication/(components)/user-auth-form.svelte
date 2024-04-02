@@ -3,18 +3,29 @@
   import { Input } from "$lib/components/ui/input/index.js";
   import { Label } from "$lib/components/ui/label/index.js";
   import { cn } from "$lib/utils.js";
-  import GitHubIcon from "lucide-svelte/icons/github";
+  import GitHubIcon from "lucide-svelte/icons/spline";
 
   let className: string | undefined | null = undefined;
   export { className as class };
 
   let isLoading = false;
+  let username = "";
+  let password = "";
+  let msg = "";
   async function onSubmit() {
     isLoading = true;
+    const response = await fetch("/api/auth/login", {
+      method: "POST",
+      body: JSON.stringify({ username, password }),
+      headers: {
+        "content-type": "application/json",
+      },
+    });
 
-    setTimeout(() => {
-      isLoading = false;
-    }, 3000);
+    const { message } = await response.json();
+    msg = message;
+
+    isLoading = false;
   }
 </script>
 
@@ -22,42 +33,38 @@
   <form on:submit|preventDefault={onSubmit}>
     <div class="grid gap-2">
       <div class="grid gap-1">
-        <Label class="sr-only" for="email">Email</Label>
+        <Label class="sr-only" for="username">Usuario</Label>
         <Input
-          id="email"
-          placeholder="name@example.com"
-          type="email"
+          id="username"
+          placeholder="Nome de Usuário"
+          type="text"
           autocapitalize="none"
-          autocomplete="email"
+          autocomplete="username"
           autocorrect="off"
           disabled={isLoading}
+          bind:value={username}
+        />
+      </div>
+      <div class="grid gap-1">
+        <Label class="sr-only" for="password">Senha</Label>
+        <Input
+          id="password"
+          placeholder="Palavra Passe"
+          type="password"
+          autocapitalize="none"
+          autocomplete="password"
+          autocorrect="off"
+          disabled={isLoading}
+          bind:value={password}
         />
       </div>
       <Button type="submit" disabled={isLoading}>
         {#if isLoading}
           <GitHubIcon class="mr-2 h-4 w-4 animate-spin" />
         {/if}
-        Sign In with Email
+        Iniciar Sessão
       </Button>
+      {msg}
     </div>
   </form>
-  <div class="relative">
-    <div class="absolute inset-0 flex items-center">
-      <span class="w-full border-t" />
-    </div>
-    <div class="relative flex justify-center text-xs uppercase">
-      <span class="bg-background px-2 text-muted-foreground">
-        Or continue with
-      </span>
-    </div>
-  </div>
-  <Button variant="outline" type="button" disabled={isLoading}>
-    {#if isLoading}
-      <GitHubIcon class="mr-2 h-4 w-4 animate-spin" />
-    {:else}
-      <GitHubIcon class="mr-2 h-4 w-4" />
-    {/if}
-    {" "}
-    GitHub
-  </Button>
 </div>

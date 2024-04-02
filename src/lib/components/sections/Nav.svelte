@@ -2,9 +2,10 @@
   import { Button } from "$lib/components/ui/button/index.js";
   import { cn } from "$lib/utils.js";
   import * as Tooltip from "$lib/components/ui/tooltip/index.js";
+  import type { Route } from "$lib/config";
 
   export let isCollapsed: boolean;
-  export let routes = [];
+  export let routes: Route[] = [];
 </script>
 
 <div
@@ -19,7 +20,7 @@
         <Tooltip.Root openDelay={0}>
           <Tooltip.Trigger asChild let:builder>
             <Button
-              href="#"
+              href={route.href}
               builders={[builder]}
               variant={route.variant}
               size="icon"
@@ -48,7 +49,7 @@
         </Tooltip.Root>
       {:else}
         <Button
-          href="#"
+          href={route.href}
           variant={route.variant}
           size="sm"
           class={cn("justify-start", {

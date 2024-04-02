@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { primaryRoutes, secondaryRoutes } from "./config.js";
+  import { primaryRoutes, secondaryRoutes } from "$/config.js";
   import Header from "$/components/sections/Header.svelte";
-  import Nav from "$lib/components/sections/Nav.svelte";
-  import { cn } from "$lib/utils.js";
-  import * as Resizable from "$lib/components/ui/resizable/index.js";
-  import { Separator } from "$lib/components/ui/select/index.js";
+  import Nav from "$/components/sections/Nav.svelte";
+  import { cn } from "$/utils.js";
+  import * as Resizable from "$/components/ui/resizable/index.js";
+  import { Separator } from "$/components/ui/select/index.js";
 
   export let data;
 

@@ -12,22 +12,23 @@ export const POST: RequestHandler = async ({ request, locals, cookies }) => {
   const { username, password } = await request.json();
 
   try {
+    //check if user exists
     const existingUser = await db.user.findFirst({
       where: {
         username,
       },
     });
-
     if (!existingUser) {
-      return json({ succsses: false, message: "Usuario não existe!" });
+      return json({ success: false, message: "Usuario não existe!" });
     }
 
+    //check if password is correct
     const validPassword = await new Argon2id().verify(
       existingUser.password,
       password
     );
     if (!validPassword) {
-      return json({ succsses: false, message: "Senha Inválida" });
+      return json({ success: false, message: "Senha Inválida" });
     }
 
     const session = await lucia.createSession(existingUser.id, {});
@@ -37,9 +38,10 @@ export const POST: RequestHandler = async ({ request, locals, cookies }) => {
       ...sessionCookie.attributes,
     });
 
-    return redirect(302, "/dashboard");
+    //redirect to dashboard page
+    return json({ success: true, message: "" });
   } catch (error) {
     console.error(error);
-    return json({ succsses: false, message: "Erro no servidor" });
+    return json({ success: false, message: "Erro no servidor" });
   }
 };

@@ -7,6 +7,7 @@
 
   import { cn } from "$lib/utils.js";
   import { Loader, CircleAlert } from "lucide-svelte";
+  import { redirect } from "@sveltejs/kit";
 
   let className: string | undefined | null = undefined;
   export { className as class };
@@ -25,9 +26,12 @@
       },
     });
 
-    const { message } = await response.json();
+    const { message, success } = await response.json();
+    if (success) {
+      isLoading = false;
+      window.location.href = "/dashboard";
+    }
     msg = message;
-
     isLoading = false;
   }
 </script>
@@ -42,7 +46,7 @@
           placeholder="Nome de Usuário"
           type="text"
           autocapitalize="none"
-          autocomplete="username"
+          autocomplete="off"
           autocorrect="off"
           disabled={isLoading}
           bind:value={username}
@@ -55,7 +59,7 @@
           placeholder="Palavra Passe"
           type="password"
           autocapitalize="none"
-          autocomplete="password"
+          autocomplete="off"
           autocorrect="off"
           disabled={isLoading}
           bind:value={password}

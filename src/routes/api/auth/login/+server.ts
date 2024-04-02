@@ -11,6 +11,14 @@ export const POST: RequestHandler = async ({ request, locals, cookies }) => {
 
   const { username, password } = await request.json();
 
+  if (username === "") {
+    return json({ success: false, message: "Introduzir Usuario" });
+  }
+
+  if (password === "") {
+    return json({ success: false, message: "Introduzir a senha" });
+  }
+
   try {
     //check if user exists
     const existingUser = await db.user.findFirst({

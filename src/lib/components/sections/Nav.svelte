@@ -2,10 +2,9 @@
   import { Button } from "$lib/components/ui/button/index.js";
   import { cn } from "$lib/utils.js";
   import * as Tooltip from "$lib/components/ui/tooltip/index.js";
-  import type { Route } from "../config.js";
 
   export let isCollapsed: boolean;
-  export let routes: Route[];
+  export let routes = [];
 </script>
 
 <div

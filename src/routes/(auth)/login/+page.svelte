@@ -5,25 +5,8 @@
   import AuthenticationDark from "$lib/img/examples/authentication-dark.png";
 </script>
 
-<div class="md:hidden">
-  <img
-    src={AuthenticationLight}
-    width={1280}
-    height={843}
-    alt="Authentication"
-    class="block dark:hidden"
-  />
-  <img
-    src={AuthenticationDark}
-    width={1280}
-    height={843}
-    alt="Authentication"
-    class="hidden dark:block"
-  />
-</div>
-
 <div
-  class="container relative hidden h-[800px] flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0"
+  class="container relative h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0"
 >
   <Button
     href="/"

@@ -55,11 +55,12 @@
     class="hidden dark:block"
   />
 </div>
+
 <div class="hidden md:block">
   <Resizable.PaneGroup
     direction="horizontal"
     {onLayoutChange}
-    class="h-full max-h-[800px] items-stretch"
+    class="h-screen items-stretch"
   >
     <Resizable.Pane
       defaultSize={defaultLayout[0]}
@@ -83,45 +84,9 @@
       <Separator />
       <Nav {isCollapsed} routes={secondaryRoutes} />
     </Resizable.Pane>
+
     <Resizable.Handle withHandle />
-    <Resizable.Pane defaultSize={defaultLayout[1]} minSize={30}>
-      <Tabs.Root value="all">
-        <div class="flex items-center px-4 py-2">
-          <h1 class="text-xl font-bold">Inbox</h1>
-          <Tabs.List class="ml-auto">
-            <Tabs.Trigger value="all" class="text-zinc-600 dark:text-zinc-200">
-              All mail
-            </Tabs.Trigger>
-            <Tabs.Trigger
-              value="unread"
-              class="text-zinc-600 dark:text-zinc-200"
-            >
-              Unread
-            </Tabs.Trigger>
-          </Tabs.List>
-        </div>
-        <Separator />
-        <div
-          class="bg-background/95 p-4 backdrop-blur supports-[backdrop-filter]:bg-background/60"
-        >
-          <form>
-            <div class="relative">
-              <Search
-                class="absolute left-2 top-3 h-4 w-4 text-muted-foreground"
-              />
-              <Input placeholder="Search" class="pl-8" />
-            </div>
-          </form>
-        </div>
-        <Tabs.Content value="all" class="m-0">
-          <MailList items={mails} />
-        </Tabs.Content>
-        <Tabs.Content value="unread" class="m-0">
-          <MailList items={mails.filter((item) => !item.read)} />
-        </Tabs.Content>
-      </Tabs.Root>
-    </Resizable.Pane>
-    <Resizable.Handle withHandle />
+
     <Resizable.Pane defaultSize={defaultLayout[2]}>
       <MailDisplay
         mail={mails.find((item) => item.id === $mailStore.selected) || null}

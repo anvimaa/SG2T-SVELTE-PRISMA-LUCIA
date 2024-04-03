@@ -1,10 +1,11 @@
 <script lang="ts">
-  import { primaryRoutes, secondaryRoutes } from "$/config.js";
   import Header from "$/components/sections/Header.svelte";
   import Nav from "$/components/sections/Nav.svelte";
-  import { cn } from "$/utils.js";
   import * as Resizable from "$/components/ui/resizable/index.js";
   import { Separator } from "$/components/ui/select/index.js";
+
+  import { cn } from "$/utils.js";
+  import { primaryRoutes, secondaryRoutes } from "$/config.js";
 
   export let data;
 
@@ -62,7 +63,7 @@
     <Resizable.Pane defaultSize={defaultLayout[2]}>
       <div class="flex h-full flex-col">
         <Header></Header>
-        <div class="flex flex-col p-8">
+        <div class="flex flex-col">
           <slot />
         </div>
       </div>

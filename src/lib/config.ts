@@ -17,7 +17,7 @@ export const primaryRoutes: Route[] = [
 		title: "Dashboard",
 		label: "",
 		icon: Grid,
-		variant: "default",
+		variant: "ghost",
 	},
 	{
 		href: "/map",
@@ -53,7 +53,7 @@ export const primaryRoutes: Route[] = [
 export const secondaryRoutes: Route[] = [
 	{
 		href: "/settings",
-		title: "Social",
+		title: "Configurações",
 		label: "",
 		icon: Settings,
 		variant: "ghost",

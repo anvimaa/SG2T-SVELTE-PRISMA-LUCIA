@@ -3,9 +3,12 @@
   import { cn } from "$lib/utils.js";
   import * as Tooltip from "$lib/components/ui/tooltip/index.js";
   import type { Route } from "$lib/config";
+  import { page } from "$app/stores";
 
   export let isCollapsed: boolean;
   export let routes: Route[] = [];
+
+  $: url = $page.url.pathname;
 </script>
 
 <div
@@ -26,8 +29,8 @@
               size="icon"
               class={cn(
                 "size-9",
-                route.variant === "default" &&
-                  "dark:bg-muted dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-white"
+                route.href === url &&
+                  "bg-slate-400 hover:bg-slate-400 dark:bg-muted dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-white"
               )}
             >
               <svelte:component
@@ -53,8 +56,8 @@
           variant={route.variant}
           size="sm"
           class={cn("justify-start", {
-            "dark:bg-muted dark:text-white dark:hover:bg-muted dark:hover:text-white":
-              route.variant === "default",
+            "bg-slate-400 hover:bg-slate-400 dark:bg-muted dark:text-white dark:hover:bg-muted dark:hover:text-white":
+              route.href === url,
           })}
         >
           <svelte:component
@@ -66,7 +69,7 @@
           {#if route.label}
             <span
               class={cn("ml-auto", {
-                "text-background dark:text-white": route.variant === "default",
+                "text-background dark:text-white": route.href === url,
               })}
             >
               {route.label}
